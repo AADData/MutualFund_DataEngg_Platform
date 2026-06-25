@@ -1,0 +1,4 @@
+fund_id,fund_code,fund_name,asset_class
+1,MF-EQ-01,AAD Equity Growth,Equity
+2,MF-BD-01,AAD Income Bond,Fixed Income
+3,MF-BL-01,AAD Balanced Opportunities,Balanced

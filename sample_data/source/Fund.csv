@@ -1,0 +1,4 @@
+fund_id,fund_code,fund_name,asset_class,currency_code,fund_status,launch_date,created_at,updated_at
+1,MF-EQ-01,AAD Equity Growth,Equity,USD,ACTIVE,2020-01-01,2026-01-01T00:00:00,
+2,MF-BD-01,AAD Income Bond,Fixed Income,USD,ACTIVE,2020-01-01,2026-01-01T00:00:00,
+3,MF-BL-01,AAD Balanced Opportunities,Balanced,USD,ACTIVE,2020-01-01,2026-01-01T00:00:00,

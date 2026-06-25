@@ -1,0 +1,56 @@
+{
+  "name": "aad-mutual-fund-lakehouse",
+  "tasks": [
+    {
+      "task_key": "setup_catalog_schemas",
+      "notebook_task": {
+        "notebook_path": "/Workspace/MutualFund/01_setup_catalog_schemas"
+      }
+    },
+    {
+      "task_key": "ingest_azure_sql_to_bronze",
+      "depends_on": [
+        {
+          "task_key": "setup_catalog_schemas"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Workspace/MutualFund/02_ingest_azure_sql_to_bronze"
+      }
+    },
+    {
+      "task_key": "bronze_to_silver",
+      "depends_on": [
+        {
+          "task_key": "ingest_azure_sql_to_bronze"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Workspace/MutualFund/03_bronze_to_silver"
+      }
+    },
+    {
+      "task_key": "silver_to_gold",
+      "depends_on": [
+        {
+          "task_key": "bronze_to_silver"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Workspace/MutualFund/04_silver_to_gold"
+      }
+    },
+    {
+      "task_key": "quality_and_maintenance",
+      "depends_on": [
+        {
+          "task_key": "silver_to_gold"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Workspace/MutualFund/05_delta_maintenance_and_quality"
+      }
+    }
+  ]
+}
+

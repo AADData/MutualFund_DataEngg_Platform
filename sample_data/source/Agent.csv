@@ -1,0 +1,4 @@
+agent_id,agent_code,agent_name,channel,country_code,active_flag,created_at,updated_at
+1,AG001,Northstar Advisory,IFA,IN,1,2026-01-01T00:00:00,
+2,AG002,Harbour Wealth,Bank,AU,1,2026-01-01T00:00:00,
+3,AG003,Summit Financial,Platform,GB,1,2026-01-01T00:00:00,

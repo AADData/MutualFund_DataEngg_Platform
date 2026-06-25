@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AADData.com | Data Engineering Portfolio</title>
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #5a6670;
+      --line: #d9e1e7;
+      --panel: #ffffff;
+      --mist: #eef5f7;
+      --teal: #0f766e;
+      --plum: #6d3f6b;
+      --gold: #b7791f;
+      --blue: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #f8fafb;
+      line-height: 1.55;
+    }
+
+    header {
+      background:
+        linear-gradient(110deg, rgba(15, 118, 110, 0.94), rgba(37, 99, 235, 0.82)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Crect width='1200' height='600' fill='%23edf6f7'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.34'%3E%3Cpath d='M80 470 C230 360, 350 410, 520 300 S830 190, 1080 120' stroke-width='5'/%3E%3Cpath d='M90 220 H1110'/%3E%3Cpath d='M90 300 H1110'/%3E%3Cpath d='M90 380 H1110'/%3E%3Cpath d='M220 120 V500'/%3E%3Cpath d='M420 120 V500'/%3E%3Cpath d='M620 120 V500'/%3E%3Cpath d='M820 120 V500'/%3E%3Cpath d='M1020 120 V500'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.86'%3E%3Ccircle cx='220' cy='405' r='8'/%3E%3Ccircle cx='420' cy='340' r='8'/%3E%3Ccircle cx='620' cy='270' r='8'/%3E%3Ccircle cx='820' cy='205' r='8'/%3E%3Ccircle cx='1020' cy='145' r='8'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: cover;
+      color: #fff;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 7vw;
+      background: rgba(23, 32, 38, 0.72);
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .hero {
+      width: min(1120px, 86vw);
+      margin: 0 auto;
+      padding-top: 70px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: 0.98;
+      margin: 0 0 22px;
+      max-width: 900px;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      font-size: 20px;
+      max-width: 760px;
+      margin: 0 0 32px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    main {
+      width: min(1120px, 86vw);
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 62px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: 30px;
+      margin: 0 0 22px;
+      letter-spacing: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 160px;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .metric {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--plum);
+      margin: 8px 0;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    footer {
+      padding: 36px 7vw;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    @media (max-width: 820px) {
+      nav {
+        padding: 14px 5vw;
+      }
+
+      nav div:last-child {
+        display: none;
+      }
+
+      .grid,
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="#">AADData.com</a>
+    <div>
+      <a href="#platform">Platform</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="hero">
+      <h1>AADData.com</h1>
+      <p class="lead">Senior data engineering portfolio focused on finance data platforms, lakehouse architecture, transfer agency analytics, and governed data products.</p>
+      <div class="actions">
+        <a class="button" href="../dashboard/">Open Dashboard</a>
+        <a class="button" href="#platform">View Project</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="platform">
+      <p class="eyebrow">Featured project</p>
+      <h2>Mutual Fund Data Engineering Platform</h2>
+      <div class="grid">
+        <article class="card">
+          <p class="eyebrow">Source</p>
+          <h3>Azure SQL</h3>
+          <p>Normalized investor, agent, fund, transaction, asset, commission, holding, and price entities.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Lakehouse</p>
+          <h3>Databricks Delta Lake</h3>
+          <p>Bronze, Silver, and Gold layers with incremental processing, quality checks, time travel, and optimized serving tables.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Analytics</p>
+          <h3>DBT and Dashboard</h3>
+          <p>Facts and dimensions powering commission, holdings, fund flows, AUM, and reconciliation views.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <p class="eyebrow">Experience signal</p>
+      <h2>17+ Years Across Finance Data Delivery</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="metric">17+</div>
+          <p>Years delivering data engineering, ETL, data warehouse, data lake, and reporting solutions.</p>
+        </article>
+        <article class="card">
+          <div class="metric">Finance</div>
+          <p>Transfer agency, asset servicing, investor/fund holdings, commissions, FATCA/CRS, and General Ledger exposure.</p>
+        </article>
+        <article class="card">
+          <div class="metric">Cloud</div>
+          <p>Azure data engineering foundation expanded through Databricks and Snowflake certification practice.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <p class="eyebrow">Learning path</p>
+      <h2>Certification-Aligned Build</h2>
+      <div class="timeline">
+        <div class="row">
+          <strong>Databricks</strong>
+          <p>Delta Lake, medallion architecture, workflows, SQL analytics, incremental processing, data quality, and performance maintenance.</p>
+        </div>
+        <div class="row">
+          <strong>Snowflake</strong>
+          <p>Warehouse concepts, schemas, roles, facts and dimensions, time travel, secure serving patterns, and cost-aware analytics design.</p>
+        </div>
+        <div class="row">
+          <strong>DBT</strong>
+          <p>Source declarations, staging models, marts, tests, documentation, lineage, and deployment discipline.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Build, Explain, Operate</h2>
+      <p>This site is designed to connect a senior CV with a working portfolio: architecture, source modelling, lakehouse pipelines, DBT marts, dashboards, and business-readable outcomes.</p>
+    </section>
+  </main>
+
+  <footer>
+    AADData.com - Data Engineering Portfolio
+  </footer>
+</body>
+</html>
+

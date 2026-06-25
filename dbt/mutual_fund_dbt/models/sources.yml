@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: silver
+    database: aaddata_mf
+    schema: silver
+    tables:
+      - name: investor
+      - name: agent
+      - name: fund
+      - name: transaction
+      - name: holding
+      - name: price
+      - name: commission
+      - name: asset
+

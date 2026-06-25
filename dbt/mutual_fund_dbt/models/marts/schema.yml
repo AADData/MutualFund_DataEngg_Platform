@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: dim_agent
+    columns:
+      - name: agent_id
+        tests: [not_null, unique]
+      - name: agent_code
+        tests: [not_null, unique]
+
+  - name: dim_fund
+    columns:
+      - name: fund_id
+        tests: [not_null, unique]
+      - name: fund_code
+        tests: [not_null, unique]
+
+  - name: dim_investor
+    columns:
+      - name: investor_id
+        tests: [not_null, unique]
+
+  - name: fact_transaction
+    columns:
+      - name: transaction_id
+        tests: [not_null, unique]
+      - name: investor_id
+        tests: [not_null]
+      - name: fund_id
+        tests: [not_null]
+
+  - name: fact_agent_commission_daily
+    columns:
+      - name: commission_date
+        tests: [not_null]
+      - name: agent_id
+        tests: [not_null]
+      - name: commission_amount
+        tests: [not_null]
+
+  - name: fact_investor_holding_daily
+    columns:
+      - name: valuation_date
+        tests: [not_null]
+      - name: investor_id
+        tests: [not_null]
+      - name: market_value
+        tests: [not_null]
+
