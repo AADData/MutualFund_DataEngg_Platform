@@ -19,19 +19,22 @@ This project is intentionally aligned to real transfer agency and asset servicin
 
 ```mermaid
 flowchart LR
-    A["Azure SQL OLTP\nInvestor, Agent, Fund, Transaction, Asset, Commission, Holding, Price"] --> B["Databricks Ingestion\nAuto Loader / JDBC / Workflows"]
-    B --> C["Bronze Delta\nRaw append-only source copies"]
-    C --> D["Silver Delta\nValidated, conformed entities"]
-    D --> E["Gold Delta\nBusiness aggregates and serving tables"]
-    E --> F["DBT Warehouse Marts\nFacts, dimensions, tests, docs"]
-    F --> G["Dashboard\nAgent commission, investor holdings, fund flows"]
-    G --> H["AADData.com\nBio and project showcase"]
+    A["Generated CSV files\nAgent, Investor, Fund, Transaction, Asset, Commission, Holding, Price"] --> B["Azure Blob Storage\nsource-landing container"]
+    B --> C["Azure SQL OLTP\nNormalized source tables"]
+    C --> D["Databricks Ingestion\nJDBC / Workflows"]
+    D --> E["Bronze Delta\nRaw append-only source copies"]
+    E --> F["Silver Delta\nValidated, conformed entities"]
+    F --> G["Gold Delta\nBusiness aggregates and serving tables"]
+    G --> H["DBT Warehouse Marts\nFacts, dimensions, tests, docs"]
+    H --> I["Dashboard\nAgent commission, investor holdings, fund flows"]
+    I --> J["AADData.com\nBio and project showcase"]
 ```
 
 ## Repository Map
 
 - `docs/` - project brief, architecture, data model, implementation roadmap.
-- `sql/` - Azure SQL transactional schema and seed data plan.
+- `sql/` - Azure SQL transactional schema and source-load plan.
+- `scripts/` - sample data generation, Blob landing upload, and Azure SQL load utilities.
 - `databricks/` - notebook and job design notes for Delta Lake ingestion and processing.
 - `docs/pipeline_and_azure_setup.md` - recommended pipeline and Azure services setup.
 - `dbt/mutual_fund_dbt/` - starter DBT project for facts, dimensions, tests, and documentation.
@@ -53,14 +56,15 @@ By completing this project you will practice:
 
 ## Suggested Build Order
 
-1. Create Azure SQL schema and generate realistic sample data.
-2. Load generated source CSV files into Azure SQL.
-3. Ingest Azure SQL source tables into Bronze Delta.
-4. Build Silver Delta tables with data quality checks and deduplication.
-5. Build Gold business tables for holdings, commissions, fund flows, and AUM.
-6. Use DBT to publish warehouse facts and dimensions.
-7. Build dashboard pages over the curated marts.
-8. Publish AADData.com as a bio plus project showcase website.
+1. Generate realistic source CSV data.
+2. Upload generated source CSV files to Azure Blob Storage landing.
+3. Load Blob landing files into Azure SQL OLTP source tables.
+4. Ingest Azure SQL source tables into Bronze Delta.
+5. Build Silver Delta tables with data quality checks and deduplication.
+6. Build Gold business tables for holdings, commissions, fund flows, and AUM.
+7. Use DBT to publish warehouse facts and dimensions.
+8. Build dashboard pages over the curated marts.
+9. Publish AADData.com as a bio plus project showcase website.
 
 ## Core Dashboards
 

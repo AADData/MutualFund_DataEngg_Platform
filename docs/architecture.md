@@ -5,12 +5,13 @@
 The platform follows an enterprise lakehouse pattern:
 
 1. Azure SQL stores normalized operational data.
-2. Databricks ingests source tables into Bronze Delta.
-3. Silver Delta standardizes, validates, and conforms source entities.
-4. Gold Delta creates business-level aggregates.
-5. DBT builds governed facts and dimensions.
-6. Dashboard reads from Gold/DBT marts.
-7. AADData.com links to the dashboard and explains the project.
+2. Azure Blob Storage acts as the landing zone for generated CSV source files before they are loaded into Azure SQL.
+3. Databricks ingests Azure SQL source tables into Bronze Delta.
+4. Silver Delta standardizes, validates, and conforms source entities.
+5. Gold Delta creates business-level aggregates.
+6. DBT builds governed facts and dimensions as mart tables/views.
+7. Dashboard reads from DBT mart facts and dimensions.
+8. AADData.com links to the dashboard and explains the project.
 
 ## Naming Convention
 
@@ -34,15 +35,31 @@ aaddata_mf.mart.dim_fund
 
 ```mermaid
 flowchart TD
-    S["Azure SQL source"] --> I["Databricks ingestion jobs"]
+    F["Generated CSV files"] --> L["Azure Blob Storage landing"]
+    L --> S["Azure SQL OLTP source"]
+    S --> I["Databricks ingestion jobs"]
     I --> B["Bronze raw Delta"]
     B --> Q["Data quality checks"]
     Q --> C["Silver conformed Delta"]
     C --> R["Business rules and reconciliation"]
     R --> G["Gold serving Delta"]
-    G --> M["DBT facts and dimensions"]
+    G --> M["DBT mart facts and dimensions"]
     M --> D["Dashboard and portfolio demo"]
 ```
+
+## Source Landing
+
+Purpose:
+
+- Provide a cloud landing zone similar to an AWS S3 raw landing bucket.
+- Keep generated source files available for replay and audit before loading into Azure SQL.
+- Separate file arrival from relational source-table loading.
+
+Default local script settings:
+
+- Container: `source-landing`
+- Prefix: `mutual-fund`
+- Files: `Agent.csv`, `Investor.csv`, `Fund.csv`, `Transaction.csv`, `Price.csv`, `Holding.csv`, `Commission.csv`, `Asset.csv`
 
 ## Bronze Layer
 
@@ -189,4 +206,3 @@ SnowPro Core practice:
 - Secure views and masking concepts.
 - Performance and clustering concepts.
 - Time travel and data retention comparison.
-

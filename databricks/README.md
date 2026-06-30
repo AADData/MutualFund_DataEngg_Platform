@@ -12,7 +12,9 @@ Recommended notebooks or jobs:
 
 ## Bronze Pattern
 
-Use JDBC ingestion from Azure SQL for the first version. Later, add event or file-based ingestion to practice Auto Loader.
+Use JDBC ingestion from Azure SQL for the first Databricks version. The upstream file landing step is Azure Blob Storage, where generated CSV files are uploaded before loading the Azure SQL OLTP source.
+
+Later, add event or file-based ingestion from Blob/ADLS to practice Auto Loader as an extension.
 
 Bronze table columns:
 
@@ -67,4 +69,3 @@ ADD CONSTRAINT valid_commission_rate CHECK (commission_rate >= 0 AND commission_
 - Investor holdings with market value.
 - Fund flow by day and month.
 - AUM by fund and valuation date.
-

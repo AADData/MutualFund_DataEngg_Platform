@@ -8,19 +8,21 @@ Recommended flow:
 
 ```mermaid
 flowchart LR
-    A["Generated source CSV files"] --> B["Azure SQL OLTP tables"]
-    B --> C["Databricks Bronze Delta"]
-    C --> D["Databricks Silver Delta"]
-    D --> E["Databricks Gold Delta"]
-    E --> F["DBT facts and dimensions"]
-    F --> G["Dashboard"]
-    G --> H["AADData.com"]
+    A["Generated source CSV files"] --> B["Azure Blob Storage landing"]
+    B --> C["Azure SQL OLTP tables"]
+    C --> D["Databricks Bronze Delta"]
+    D --> E["Databricks Silver Delta"]
+    E --> F["Databricks Gold Delta"]
+    F --> G["DBT mart facts and dimensions"]
+    G --> H["Dashboard"]
+    H --> I["AADData.com"]
 ```
 
 ## Why This Pipeline
 
 This design is stronger for your CV because it mirrors an enterprise source-to-lakehouse platform:
 
+- Azure Blob Storage behaves like the file landing area used before source-system loading.
 - Azure SQL behaves like the operational transfer agency source.
 - Databricks demonstrates lakehouse ingestion, Delta Lake, data quality, and transformation.
 - DBT demonstrates analytics engineering discipline over curated data.
@@ -41,7 +43,25 @@ This creates:
 - `sample_data/source/*.csv` for Azure SQL source loading.
 - `sample_data/marts/*.csv` only for local dashboard demo mode.
 
-### 2. Create Azure SQL tables
+### 2. Upload source files to Azure Blob Storage
+
+Use:
+
+```powershell
+pip install -r requirements-local.txt
+$env:AZURE_STORAGE_CONNECTION_STRING="<storage-account-connection-string>"
+$env:AZURE_BLOB_CONTAINER="source-landing"
+$env:AZURE_BLOB_PREFIX="mutual-fund"
+python scripts\upload_source_csvs_to_blob.py
+```
+
+This uploads files to:
+
+```text
+source-landing/mutual-fund/*.csv
+```
+
+### 3. Create Azure SQL tables
 
 Run this script in Azure Data Studio or SQL Server Management Studio:
 
@@ -49,19 +69,30 @@ Run this script in Azure Data Studio or SQL Server Management Studio:
 sql/azure_sql_schema.sql
 ```
 
-### 3. Load source CSV files into Azure SQL
+### 4. Load source CSV files into Azure SQL
 
 Use:
 
 ```powershell
-pip install pyodbc
+pip install -r requirements-local.txt
 $env:AZURE_SQL_CONNECTION_STRING="Server=tcp:<server>.database.windows.net,1433;Database:<db>;Uid:<user>;Pwd:<password>;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+$env:AZURE_STORAGE_CONNECTION_STRING="<storage-account-connection-string>"
+$env:AZURE_SQL_LOAD_SOURCE="blob"
+$env:AZURE_BLOB_CONTAINER="source-landing"
+$env:AZURE_BLOB_PREFIX="mutual-fund"
+python scripts\load_source_csvs_to_azure_sql.py
+```
+
+If you want a local development fallback without Blob Storage:
+
+```powershell
+$env:AZURE_SQL_LOAD_SOURCE="local"
 python scripts\load_source_csvs_to_azure_sql.py
 ```
 
 If `pyodbc` complains, install the Microsoft ODBC Driver for SQL Server.
 
-### 4. Import Databricks notebooks
+### 5. Import Databricks notebooks
 
 Import these files into a Databricks workspace folder such as `/Workspace/MutualFund`:
 
@@ -79,7 +110,7 @@ Update `00_config.py` with:
 - ADLS Gen2 storage path.
 - Databricks secret scope name.
 
-### 5. Run Databricks pipeline
+### 6. Run Databricks pipeline
 
 Run notebooks in this order:
 
@@ -91,7 +122,7 @@ Run notebooks in this order:
 
 Later, create a Databricks Workflow using `databricks/databricks_job.json` as the design template.
 
-### 6. Run DBT
+### 7. Run DBT
 
 Point DBT to Databricks or Snowflake, then run:
 
@@ -113,7 +144,7 @@ rg-aad-mutual-fund-dev
 Minimum services:
 
 - Azure SQL Database for OLTP source.
-- Azure Storage Account with ADLS Gen2 enabled for Delta Lake storage.
+- Azure Storage Account with Blob landing and ADLS Gen2 enabled for Delta Lake storage.
 - Azure Databricks workspace.
 - Azure Key Vault for secrets.
 - Azure Static Web Apps for AADData.com.
@@ -156,10 +187,11 @@ Use a dev-only setup:
 The first success milestone should be small:
 
 1. Create Azure SQL.
-2. Load the generated source CSV files.
-3. Create Databricks workspace and secret scope.
-4. Run Bronze ingestion from Azure SQL.
-5. Confirm Bronze Delta tables exist.
+2. Create Azure Storage Account and Blob landing container.
+3. Upload generated source CSV files to Blob Storage.
+4. Load Azure SQL from Blob landing.
+5. Create Databricks workspace and secret scope.
+6. Run Bronze ingestion from Azure SQL.
+7. Confirm Bronze Delta tables exist.
 
 After that, build Silver, Gold, DBT, and dashboard.
-

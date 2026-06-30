@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AADData.com | Data Engineering Portfolio</title>
+  <title>Amar Deshmukh | Senior Data Engineer Portfolio</title>
   <style>
     :root {
       --ink: #172026;
@@ -152,6 +152,132 @@
       gap: 16px;
     }
 
+    .compact-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .compact-list li {
+      margin: 6px 0;
+    }
+
+    .highlight-band {
+      background: #eef5f7;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-left: calc((100vw - min(1120px, 86vw)) / -2);
+      margin-right: calc((100vw - min(1120px, 86vw)) / -2);
+      padding-left: calc((100vw - min(1120px, 86vw)) / 2);
+      padding-right: calc((100vw - min(1120px, 86vw)) / 2);
+    }
+
+    .section-intro {
+      max-width: 820px;
+      color: var(--muted);
+      margin: -8px 0 24px;
+    }
+
+    .diagram-shell {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      overflow-x: auto;
+    }
+
+    .diagram {
+      width: 100%;
+      min-width: 980px;
+      display: block;
+    }
+
+    .diagram-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .asset-link {
+      color: var(--teal);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .asset-link:hover {
+      text-decoration: underline;
+    }
+
+    .diagram-title {
+      font: 700 18px Arial, Helvetica, sans-serif;
+      fill: #172026;
+    }
+
+    .diagram-subtitle,
+    .diagram-note {
+      font: 13px Arial, Helvetica, sans-serif;
+      fill: #5a6670;
+    }
+
+    .diagram-label {
+      font: 700 14px Arial, Helvetica, sans-serif;
+      fill: #172026;
+    }
+
+    .diagram-small {
+      font: 12px Arial, Helvetica, sans-serif;
+      fill: #5a6670;
+    }
+
+    .diagram-tiny {
+      font: 11px Arial, Helvetica, sans-serif;
+      fill: #5a6670;
+    }
+
+    .box {
+      fill: #fff;
+      stroke: #b9c7d2;
+      stroke-width: 1.4;
+    }
+
+    .box-source {
+      fill: #f3f7f8;
+      stroke: #91a5b3;
+    }
+
+    .box-sql {
+      fill: #ecfdf5;
+      stroke: #0f766e;
+    }
+
+    .box-lake {
+      fill: #eff6ff;
+      stroke: #2563eb;
+    }
+
+    .box-mart {
+      fill: #fdf2f8;
+      stroke: #6d3f6b;
+    }
+
+    .box-report {
+      fill: #fff7ed;
+      stroke: #b7791f;
+    }
+
+    .arrow {
+      fill: none;
+      stroke: #50606b;
+      stroke-width: 2;
+      marker-end: url(#arrowhead);
+    }
+
+    .schema-line {
+      fill: none;
+      stroke: #8293a0;
+      stroke-width: 1.4;
+    }
+
     .row {
       display: grid;
       grid-template-columns: 190px 1fr;
@@ -184,9 +310,12 @@
 </head>
 <body>
   <nav>
-    <a class="brand" href="#">AADData.com</a>
+    <a class="brand" href="#">Amar Deshmukh</a>
     <div>
       <a href="#platform">Platform</a>
+      <a href="#role-fit">Role Fit</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#warehouse">Warehouse</a>
       <a href="#experience">Experience</a>
       <a href="#certifications">Certifications</a>
       <a href="#contact">Contact</a>
@@ -195,10 +324,10 @@
 
   <header>
     <div class="hero">
-      <h1>AADData.com</h1>
-      <p class="lead">Senior data engineering portfolio focused on finance data platforms, lakehouse architecture, transfer agency analytics, and governed data products.</p>
+      <h1>Amar Deshmukh</h1>
+      <p class="lead">Senior Data Engineer with 17+ years across enterprise data platforms, finance operations, stakeholder-facing delivery, technical analysis, ETL/data lake engineering, production support, and functional domains including transfer agency, asset servicing, regulatory reporting, and General Ledger. Currently building hands-on Databricks, DBT, and Snowflake-aligned project evidence.</p>
       <div class="actions">
-        <a class="button" href="../dashboard/">Open Dashboard</a>
+        <a class="button" href="https://github.com/AADData/MutualFund_DataEngg_Platform">View GitHub Repo</a>
         <a class="button" href="#platform">View Project</a>
       </div>
     </div>
@@ -208,11 +337,12 @@
     <section id="platform">
       <p class="eyebrow">Featured project</p>
       <h2>Mutual Fund Data Engineering Platform</h2>
+      <p class="section-intro">A verifiable portfolio case study for Perth, Australia data engineering roles, showing practical Azure SQL, Databricks Lakehouse, DBT, dimensional modelling, and dashboard delivery.</p>
       <div class="grid">
         <article class="card">
           <p class="eyebrow">Source</p>
-          <h3>Azure SQL</h3>
-          <p>Normalized investor, agent, fund, transaction, asset, commission, holding, and price entities.</p>
+          <h3>Blob Landing and Azure SQL</h3>
+          <p>CSV source files land in Azure Blob Storage, then load into normalized investor, agent, fund, transaction, commission, holding, asset, and price tables.</p>
         </article>
         <article class="card">
           <p class="eyebrow">Lakehouse</p>
@@ -224,6 +354,52 @@
           <h3>DBT and Dashboard</h3>
           <p>Facts and dimensions powering commission, holdings, fund flows, AUM, and reconciliation views.</p>
         </article>
+      </div>
+    </section>
+
+    <section id="role-fit" class="highlight-band">
+      <p class="eyebrow">Role alignment</p>
+      <h2>Enterprise Data Engineering, Integration, And Operations</h2>
+      <div class="grid">
+        <article class="card">
+          <p class="eyebrow">Technical delivery</p>
+          <h3>Data Platforms And Pipelines</h3>
+          <p>Experience across SQL Server, Informatica, SSIS, Ab-Initio, Kafka/MQ, Kudu, data lake hydration, EOD/intraday reporting, automation, and performance tuning.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Stakeholders</p>
+          <h3>Bridge Between Business And Engineering</h3>
+          <p>Strong record translating operational requirements into technical designs, coordinating global teams, managing UAT, documenting delivery, and supporting production outcomes.</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Functional depth</p>
+          <h3>Finance To Trading-Style Data</h3>
+          <p>Domain background in investor/fund transactions, holdings, commissions, FATCA/CRS, General Ledger, reconciliations, and valuation-style reporting patterns.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <p class="eyebrow">Architecture diagram</p>
+      <h2>Operational Source To Reporting Flow</h2>
+      <p class="section-intro">The platform starts with generated CSV files landing in Azure Blob Storage, loading into Azure SQL OLTP, then flowing through Databricks Delta Lake medallion layers before DBT publishes facts and dimensions for reporting.</p>
+      <div class="diagram-shell" aria-label="Architecture diagram showing Azure Blob Storage landing, Azure SQL, Databricks, DBT mart tables, and dashboard reporting">
+        <img class="diagram" src="assets/architecture-diagram.svg" alt="AADData mutual fund data platform architecture with Blob Storage landing, Azure SQL, Databricks, DBT mart tables, and web reporting">
+      </div>
+      <div class="diagram-actions">
+        <a class="asset-link" href="assets/architecture-diagram.svg" download>Download architecture SVG</a>
+      </div>
+    </section>
+
+    <section id="warehouse">
+      <p class="eyebrow">Data warehouse schema</p>
+      <h2>Facts And Dimensions Model</h2>
+      <p class="section-intro">The warehouse model is designed for daily and monthly mutual fund reporting, with conformed dimensions shared across transaction, commission, holding, fund flow, and AUM facts.</p>
+      <div class="diagram-shell" aria-label="Data warehouse schema diagram showing facts and dimensions">
+        <img class="diagram" src="assets/warehouse-star-schema.svg" alt="Mutual fund data warehouse star schema with dimensions and fact tables">
+      </div>
+      <div class="diagram-actions">
+        <a class="asset-link" href="assets/warehouse-star-schema.svg" download>Download warehouse schema SVG</a>
       </div>
     </section>
 
@@ -247,34 +423,53 @@
     </section>
 
     <section id="certifications">
-      <p class="eyebrow">Learning path</p>
-      <h2>Certification-Aligned Build</h2>
-      <div class="timeline">
-        <div class="row">
-          <strong>Databricks</strong>
-          <p>Delta Lake, medallion architecture, workflows, SQL analytics, incremental processing, data quality, and performance maintenance.</p>
-        </div>
-        <div class="row">
-          <strong>Snowflake</strong>
-          <p>Warehouse concepts, schemas, roles, facts and dimensions, time travel, secure serving patterns, and cost-aware analytics design.</p>
-        </div>
-        <div class="row">
-          <strong>DBT</strong>
-          <p>Source declarations, staging models, marts, tests, documentation, lineage, and deployment discipline.</p>
-        </div>
+      <p class="eyebrow">Certifications and active learning</p>
+      <h2>Architecture, Azure, Data Warehousing, And Investment Domain</h2>
+      <div class="grid">
+        <article class="card">
+          <p class="eyebrow">In progress</p>
+          <h3>Hands-On Upskilling</h3>
+          <ul class="compact-list">
+            <li>Databricks Data Engineer Associate</li>
+            <li>SnowPro Core</li>
+            <li>DBT project implementation through this portfolio build</li>
+          </ul>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Cloud and data</p>
+          <h3>Microsoft And Snowflake</h3>
+          <ul class="compact-list">
+            <li>Microsoft Certified Azure Data Engineer Associate - DP-203</li>
+            <li>AZ-900 Azure Fundamentals</li>
+            <li>Snowflake Hands-On Essentials: Data Warehouse</li>
+            <li>Microsoft Certified Professional</li>
+            <li>70-461 Querying Microsoft SQL Server 2012</li>
+            <li>70-463 Implementing Data Warehouse with Microsoft SQL Server 2012</li>
+          </ul>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Architecture and domain</p>
+          <h3>Enterprise And Functional</h3>
+          <ul class="compact-list">
+            <li>TOGAF Enterprise Architecture Practitioner</li>
+            <li>TOGAF Foundation</li>
+            <li>BNY AI Foundation</li>
+            <li>BNY AI Builder</li>
+            <li>PMI Certified Associate in Project Management</li>
+            <li>Chartered Institute for Securities and Investment, UK - Investment Administration Qualification</li>
+          </ul>
+        </article>
       </div>
     </section>
 
     <section id="contact">
       <p class="eyebrow">Contact</p>
-      <h2>Build, Explain, Operate</h2>
-      <p>This site is designed to connect a senior CV with a working portfolio: architecture, source modelling, lakehouse pipelines, DBT marts, dashboards, and business-readable outcomes.</p>
+      <h2>AMARDESHM@GMAIL.COM - +91(0)8411001200</h2>
     </section>
   </main>
 
   <footer>
-    AADData.com - Data Engineering Portfolio
+    Amar Deshmukh - Senior Data Engineering Portfolio
   </footer>
 </body>
 </html>
-

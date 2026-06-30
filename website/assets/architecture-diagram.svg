@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AADData Mutual Fund Data Engineering Platform Architecture</title>
+  <desc id="desc">Architecture diagram showing flat files landed in Azure Blob Storage, loaded into Azure SQL OLTP, processed through Databricks Bronze, Silver and Gold Delta layers, transformed by dbt into warehouse facts and dimensions, and consumed by a web dashboard on AADData.com.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 34px Arial, Helvetica, sans-serif; fill: #10202a; }
+      .subtitle { font: 18px Arial, Helvetica, sans-serif; fill: #50606b; }
+      .section { font: 700 16px Arial, Helvetica, sans-serif; fill: #334155; letter-spacing: .4px; }
+      .label { font: 700 20px Arial, Helvetica, sans-serif; fill: #10202a; }
+      .small { font: 15px Arial, Helvetica, sans-serif; fill: #475569; }
+      .tiny { font: 13px Arial, Helvetica, sans-serif; fill: #64748b; }
+      .white { fill: #ffffff; }
+      .shadow { filter: drop-shadow(0 8px 16px rgba(15, 23, 42, .10)); }
+      .arrow { fill: none; stroke: #475569; stroke-width: 4; marker-end: url(#arrow); }
+      .soft-arrow { fill: none; stroke: #64748b; stroke-width: 3; stroke-dasharray: 8 8; marker-end: url(#arrowSoft); }
+    </style>
+    <marker id="arrow" markerWidth="14" markerHeight="12" refX="12" refY="6" orient="auto">
+      <path d="M0,0 L14,6 L0,12 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrowSoft" markerWidth="14" markerHeight="12" refX="12" refY="6" orient="auto">
+      <path d="M0,0 L14,6 L0,12 Z" fill="#64748b"/>
+    </marker>
+    <linearGradient id="heroGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="lakeGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#dbeafe"/>
+      <stop offset="1" stop-color="#eff6ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" class="bg"/>
+  <rect x="0" y="0" width="1600" height="112" fill="url(#heroGrad)"/>
+  <text x="64" y="52" class="title" fill="#ffffff">AADData Mutual Fund Data Engineering Platform</text>
+
+  <text x="76" y="160" class="section">SOURCE LANDING</text>
+  <rect x="62" y="178" width="232" height="286" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2" class="shadow"/>
+  <ellipse cx="178" cy="228" rx="70" ry="22" fill="#bfdbfe" stroke="#2563eb" stroke-width="4"/>
+  <rect x="108" y="228" width="140" height="74" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/>
+  <ellipse cx="178" cy="302" rx="70" ry="22" fill="#eff6ff" stroke="#2563eb" stroke-width="4"/>
+  <path d="M130 216 h46 l18 18 v36 h-64 z" fill="#ffffff" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M176 216 v19 h18" fill="none" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M162 250 h46 l18 18 v36 h-64 z" fill="#ffffff" stroke="#64748b" stroke-width="2.5"/>
+  <path d="M208 250 v19 h18" fill="none" stroke="#64748b" stroke-width="2.5"/>
+  <text x="96" y="366" class="label">Azure Blob Storage</text>
+  <text x="96" y="394" class="small">Landing container</text>
+  <text x="96" y="418" class="tiny">CSV: Agent, Investor, Fund,</text>
+  <text x="96" y="438" class="tiny">Transaction, Price, Holding,</text>
+  <text x="96" y="458" class="tiny">Commission, Asset</text>
+
+  <path d="M294 253 H340" class="arrow"/>
+
+  <text x="376" y="160" class="section">OPERATIONAL SOURCE</text>
+  <rect x="346" y="178" width="244" height="286" rx="16" fill="#ecfdf5" stroke="#0f766e" stroke-width="2" class="shadow"/>
+  <ellipse cx="458" cy="226" rx="78" ry="26" fill="#a7f3d0" stroke="#047857" stroke-width="4"/>
+  <rect x="380" y="226" width="156" height="92" fill="#d1fae5" stroke="#047857" stroke-width="4"/>
+  <ellipse cx="458" cy="318" rx="78" ry="26" fill="#ecfdf5" stroke="#047857" stroke-width="4"/>
+  <text x="386" y="374" class="label">Azure SQL DB</text>
+  <text x="386" y="402" class="small">OLTP relational model</text>
+  <text x="386" y="426" class="tiny">PK/FK constraints</text>
+  <text x="386" y="446" class="tiny">Investor, Agent, Fund,</text>
+  <text x="386" y="466" class="tiny">Transaction, Holding, Price</text>
+
+  <path d="M590 253 H660" class="arrow"/>
+
+  <text x="696" y="160" class="section">LAKEHOUSE PROCESSING</text>
+  <rect x="666" y="178" width="452" height="268" rx="16" fill="url(#lakeGrad)" stroke="#2563eb" stroke-width="2" class="shadow"/>
+  <text x="704" y="218" class="label">Azure Databricks</text>
+  <text x="704" y="246" class="small">Delta Lake medallion architecture</text>
+
+  <rect x="704" y="284" width="112" height="86" rx="12" fill="#fed7aa" stroke="#c2410c" stroke-width="3"/>
+  <text x="728" y="319" class="label">Bronze</text>
+  <text x="724" y="346" class="tiny">raw copies</text>
+
+  <path d="M816 327 H852" class="arrow"/>
+
+  <rect x="852" y="284" width="112" height="86" rx="12" fill="#e5e7eb" stroke="#6b7280" stroke-width="3"/>
+  <text x="882" y="319" class="label">Silver</text>
+  <text x="875" y="346" class="tiny">validated</text>
+
+  <path d="M964 327 H1000" class="arrow"/>
+
+  <rect x="1000" y="284" width="82" height="86" rx="12" fill="#fef3c7" stroke="#b7791f" stroke-width="3"/>
+  <text x="1017" y="319" class="label">Gold</text>
+  <text x="1012" y="346" class="tiny">serving</text>
+
+  <path d="M892 446 V528" class="soft-arrow"/>
+
+  <text x="674" y="528" class="section">PHYSICAL DELTA STORAGE</text>
+  <rect x="666" y="548" width="452" height="152" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="2" class="shadow"/>
+  <path d="M720 604 c36 -58 90 -58 126 0 c28 44 82 40 108 0 c42 -64 96 -62 132 0 v48 h-366 z" fill="#bfdbfe" stroke="#2563eb" stroke-width="4"/>
+  <text x="748" y="746" class="label">ADLS Gen2</text>
+  <text x="748" y="774" class="small">Stores Delta tables for Bronze, Silver, Gold and marts</text>
+
+  <path d="M1118 253 H1208" class="arrow"/>
+
+  <text x="1238" y="160" class="section">ANALYTICS ENGINEERING</text>
+  <rect x="1214" y="178" width="244" height="268" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" class="shadow"/>
+  <circle cx="1282" cy="244" r="42" fill="#ede9fe" stroke="#7c3aed" stroke-width="4"/>
+  <text x="1258" y="252" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#5b21b6">dbt</text>
+  <text x="1264" y="322" class="label">dbt Models</text>
+  <text x="1246" y="350" class="small">SQL transformations</text>
+  <text x="1246" y="374" class="tiny">tests, docs, lineage</text>
+  <text x="1246" y="394" class="tiny">incremental mart builds</text>
+
+  <path d="M1336 446 V528" class="arrow"/>
+
+  <text x="1228" y="528" class="section">WAREHOUSE MART</text>
+  <rect x="1214" y="548" width="244" height="152" rx="16" fill="#fdf2f8" stroke="#be185d" stroke-width="2" class="shadow"/>
+  <rect x="1244" y="586" width="86" height="72" rx="10" fill="#fce7f3" stroke="#be185d" stroke-width="3"/>
+  <rect x="1342" y="586" width="86" height="72" rx="10" fill="#fce7f3" stroke="#be185d" stroke-width="3"/>
+  <text x="1260" y="630" class="small">Dims</text>
+  <text x="1356" y="630" class="small">Facts</text>
+  <text x="1240" y="746" class="label">Delta Mart Tables</text>
+  <text x="1240" y="774" class="small">Dimensional model for reporting</text>
+
+  <path d="M1458 624 H1516 V253 H1460" class="arrow"/>
+  <path d="M1214 624 H1160 V806 H622" class="arrow"/>
+
+  <text x="76" y="646" class="section">REPORTING AND PORTFOLIO</text>
+  <rect x="62" y="666" width="560" height="174" rx="16" fill="#fff7ed" stroke="#b7791f" stroke-width="2" class="shadow"/>
+  <rect x="92" y="704" width="132" height="82" rx="10" fill="#ffedd5" stroke="#b7791f" stroke-width="3"/>
+  <rect x="110" y="724" width="96" height="12" rx="3" fill="#b7791f"/>
+  <rect x="110" y="746" width="72" height="10" rx="3" fill="#b7791f" opacity=".72"/>
+  <rect x="110" y="766" width="84" height="10" rx="3" fill="#b7791f" opacity=".52"/>
+  <text x="252" y="718" class="label">Web Dashboard + AADData.com</text>
+  <text x="252" y="746" class="small">Agent commission, investor holdings, fund flows,</text>
+  <text x="252" y="770" class="small">AUM, reconciliation, data quality evidence</text>
+  <text x="252" y="798" class="tiny">Designed for employer review and portfolio verification</text>
+</svg>
