@@ -20,6 +20,20 @@ models:
       - name: investor_id
         tests: [not_null, unique]
 
+  - name: dim_asset
+    columns:
+      - name: asset_id
+        tests: [not_null, unique]
+      - name: asset_code
+        tests: [not_null]
+
+  - name: dim_date
+    columns:
+      - name: date_key
+        tests: [not_null, unique]
+      - name: calendar_date
+        tests: [not_null]
+
   - name: fact_transaction
     columns:
       - name: transaction_id
@@ -47,3 +61,22 @@ models:
       - name: market_value
         tests: [not_null]
 
+  - name: fact_fund_flow_daily
+    columns:
+      - name: trade_date
+        tests: [not_null]
+      - name: fund_id
+        tests: [not_null]
+      - name: net_amount
+        tests: [not_null]
+
+  - name: fact_fund_aum_daily
+    columns:
+      - name: valuation_date
+        tests: [not_null]
+      - name: fund_id
+        tests: [not_null]
+      - name: asset_id
+        tests: [not_null]
+      - name: aum_amount
+        tests: [not_null]

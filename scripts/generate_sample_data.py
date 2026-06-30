@@ -150,7 +150,7 @@ def main() -> None:
                 )
                 holding_id += 1
 
-    for day in days[::30]:
+    for day in days[::7]:
         for fund in funds:
             for asset_type, sector in [("Equity", "Financials"), ("Bond", "Government"), ("Cash", "Treasury")]:
                 assets.append(
