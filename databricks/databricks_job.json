@@ -1,10 +1,16 @@
 {
-  "name": "aad-mutual-fund-lakehouse",
+  "name": "aad-mutual-fund-lakehouse-workflow",
+  "max_concurrent_runs": 1,
+  "tags": {
+    "Project": "AADData-MutualFund",
+    "Environment": "Dev",
+    "Owner": "Amar"
+  },
   "tasks": [
     {
       "task_key": "setup_catalog_schemas",
       "notebook_task": {
-        "notebook_path": "/Workspace/MutualFund/01_setup_catalog_schemas"
+        "notebook_path": "/Workspace/Users/amardeshm1@gmail.com/AADData_MutualFund_Project/01_setup_catalog_schemas"
       }
     },
     {
@@ -15,7 +21,7 @@
         }
       ],
       "notebook_task": {
-        "notebook_path": "/Workspace/MutualFund/02_ingest_azure_sql_to_bronze"
+        "notebook_path": "/Workspace/Users/amardeshm1@gmail.com/AADData_MutualFund_Project/02_ingest_azure_sql_to_bronze"
       }
     },
     {
@@ -26,7 +32,7 @@
         }
       ],
       "notebook_task": {
-        "notebook_path": "/Workspace/MutualFund/03_bronze_to_silver"
+        "notebook_path": "/Workspace/Users/amardeshm1@gmail.com/AADData_MutualFund_Project/03_bronze_to_silver"
       }
     },
     {
@@ -37,7 +43,7 @@
         }
       ],
       "notebook_task": {
-        "notebook_path": "/Workspace/MutualFund/04_silver_to_gold"
+        "notebook_path": "/Workspace/Users/amardeshm1@gmail.com/AADData_MutualFund_Project/04_silver_to_gold"
       }
     },
     {
@@ -48,9 +54,8 @@
         }
       ],
       "notebook_task": {
-        "notebook_path": "/Workspace/MutualFund/05_delta_maintenance_and_quality"
+        "notebook_path": "/Workspace/Users/amardeshm1@gmail.com/AADData_MutualFund_Project/05_delta_maintenance_and_quality"
       }
     }
   ]
 }
-

@@ -13,7 +13,7 @@ GOLD_SCHEMA = "gold"
 
 # Use an external ADLS Gen2 location for a realistic portfolio build.
 # Example: abfss://lakehouse@<storage-account>.dfs.core.windows.net/mutual-fund-platform
-LAKEHOUSE_BASE_PATH = "abfss://lakehouse@<storage-account>.dfs.core.windows.net/mutual-fund-platform"
+LAKEHOUSE_BASE_PATH = "abfss://delta-lake@staaddatamfdev01.dfs.core.windows.net/mutual-fund-platform"
 
 SOURCE_SYSTEM = "azure_sql_mutual_fund"
 
@@ -55,4 +55,3 @@ SOURCE_TABLES = [
     {"source_table": "dbo.Commission", "target_table": "commission", "primary_key": "commission_id", "watermark": "created_at"},
     {"source_table": "dbo.Asset", "target_table": "asset", "primary_key": "asset_id", "watermark": "valuation_date"},
 ]
-
